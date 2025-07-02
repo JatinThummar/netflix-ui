@@ -1,24 +1,44 @@
 import { useEffect } from 'react';
+import { Platform } from 'react-native';
 import { DeviceMotion } from 'expo-sensors';
 import { useSharedValue, withSpring } from 'react-native-reanimated';
 import { DeviceMotionData } from '@/types/movie';
 
 export function useDeviceMotion() {
-    const tiltX = useSharedValue(0);
-    const tiltY = useSharedValue(0);
+  const tiltX = useSharedValue(0);
+  const tiltY = useSharedValue(0);
 
-    useEffect(() => {
-        const subscription = DeviceMotion.addListener((data: DeviceMotionData) => {
-            tiltX.value = withSpring(data.rotation.gamma * 4);
-            tiltY.value = withSpring(data.rotation.beta * 4);
-        });
+  useEffect(() => {
+    let subscription: any;
 
-        DeviceMotion.setUpdateInterval(16);
+    const subscribe = async () => {
+      if (Platform.OS === 'web') {
+        console.warn('DeviceMotion is not supported on web.');
+        return;
+      }
 
-        return () => {
-            subscription.remove();
-        };
-    }, []);
+      const isAvailable = await DeviceMotion.isAvailableAsync();
+      if (!isAvailable) {
+        console.warn('DeviceMotion is not available on this device.');
+        return;
+      }
 
-    return { tiltX, tiltY };
-} 
+      DeviceMotion.setUpdateInterval(16); // 60fps update rate
+
+      subscription = DeviceMotion.addListener((data: DeviceMotionData) => {
+        if (!data?.rotation) return;
+
+        tiltX.value = withSpring((data.rotation.gamma ?? 0) * 4);
+        tiltY.value = withSpring((data.rotation.beta ?? 0) * 4);
+      });
+    };
+
+    subscribe();
+
+    return () => {
+      if (subscription) subscription.remove();
+    };
+  }, []);
+
+  return { tiltX, tiltY };
+}

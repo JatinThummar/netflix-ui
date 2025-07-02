@@ -3,7 +3,7 @@ import { View, Text, Pressable, ScrollView, Modal, StyleSheet } from 'react-nati
 import { BlurView } from 'expo-blur';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Haptics from 'expo-haptics';
+// import * as Haptics from 'expo-haptics';
 
 interface CategoriesListModalProps {
     visible: boolean;
@@ -42,11 +42,11 @@ export function CategoriesListModal({ visible, onClose }: CategoriesListModalPro
     const insets = useSafeAreaInsets();
 
     const handleCategoryPress = async (category: string) => {
-        await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        // await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     };
 
     const handleClose = async () => {
-        await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        // await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         onClose();
     };
 

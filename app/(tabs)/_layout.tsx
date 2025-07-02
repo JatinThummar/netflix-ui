@@ -2,7 +2,7 @@ import { Tabs, useRouter, usePathname } from 'expo-router';
 import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Platform, StyleSheet, Image, View, Pressable } from 'react-native';
-import * as Haptics from 'expo-haptics';
+// import * as Haptics from 'expo-haptics';
 import { useUser } from '@/contexts/UserContext';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { Home } from '@/icons/Home';
@@ -54,7 +54,7 @@ export const TAB_SCREENS = [
     name: 'index',
     title: 'Home',
     icon: ({ color, focused }: { color: string; focused: boolean }) => (
-      <Home color={color} isActive={focused} />
+      <Home color={color} isActive={true} />
     ),
   },
   {
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
 export default function TabLayout() {
   const pathname = usePathname();
   const handleTabPress = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    // Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
 
   return (

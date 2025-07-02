@@ -15,7 +15,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import { movies } from '@/data/movies.json';
-import * as Haptics from 'expo-haptics';
+// import * as Haptics from 'expo-haptics';
 import { BlurView } from 'expo-blur';
 
 const SCALE_FACTOR = 0.83;
@@ -47,7 +47,7 @@ export default function MovieScreen() {
     // alert(JSON.stringify(movie))
     const handleHapticFeedback = useCallback(() => {
         try {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+            // Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         } catch (error) {
             console.log('Haptics not available:', error);
         }

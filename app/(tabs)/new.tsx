@@ -188,7 +188,7 @@ export default function NewScreen() {
         <TabScreenWrapper isActive={isActive} slideDirection={slideDirection}>
             <View style={newStyles.container}>
                 <StatusBar style="light" />
-                <SafeAreaView>
+                <SafeAreaView style={{ height: '100%' }}>
                     <View style={[newStyles.header]}>
                         <View style={newStyles.headerContent}>
                             <Text style={newStyles.headerTitle}>New & Hot</Text>
